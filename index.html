@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>UCT Eyewitness Lab</title>
 
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.css" />
 
-    <script src="js/vendor/require.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/vendor/require.js"></script>
+    <script src="/js/main.js"></script>
 </head>
 <body>
     <header>
@@ -36,9 +36,20 @@
         </nav>
     </header>
 
-    <script type="text/javascript">
-        require(['jquery', 'bootstrap', 'backbone', 'marionette'], function(){
+    <div id="injection-point"></div>
 
+    <script type="text/javascript">
+        require(['jquery', 'bootstrap'], function(){ });
+        require(['app/collections/users', 'app/views/admin/users/list'], function(UserCollection, UserListView){
+            var collection = new UserCollection();
+
+            $.when(collection.fetch()).done(function(){
+                var view = new UserListView({
+                    collection: collection
+                });
+
+                $('#injection-point').html(view.render());
+            });
         });
     </script>
 </body>

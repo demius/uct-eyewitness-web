@@ -1,11 +1,11 @@
 <?php
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
-require 'entities/User.php';
-require 'entities/Role.php';
-require 'entities/UserRole.php';
+require '../entities/User.php';
+require '../entities/Role.php';
+require '../entities/UserRole.php';
 
-require 'entities/mappers/UserMapper.php';
+require '../entities/mappers/UserMapper.php';
 
 $app = new \Slim\Slim();
 

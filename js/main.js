@@ -1,8 +1,8 @@
 require.config({
-    baseUrl: 'js/vendor',
+    baseUrl: '/js/vendor',
     paths: {
-        'app': '../app',
-        'templates': '../../templates',
+        'app': '/js/app',
+        'templates': '/templates',
         'text': 'text',
         'jquery': 'jquery-1.11.2.min',
         'bootstrap': 'bootstrap.min',

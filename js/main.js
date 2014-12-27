@@ -25,6 +25,6 @@ require.config({
         'bootstrap': {
             deps: ['jquery']
         }
-    }
-    //urlArgs: "bust=" + (new Date()).getTime()
+    },
+    urlArgs: "bust=" + (new Date()).getTime()
 });

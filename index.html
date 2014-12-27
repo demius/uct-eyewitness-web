@@ -11,45 +11,36 @@
     <script src="/js/main.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#"><img src="img/uct-logo.gif" alt="University of Cape Town" /></a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Contact us</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-    </header>
-
-    <div id="injection-point"></div>
+    <div id="page-wrapper">
+        <header id="nav"></header>
+        <div id="page"></div>
+        <footer id="footer"></footer>
+    </div>
 
     <script type="text/javascript">
-        require(['jquery', 'bootstrap'], function(){ });
-        require(['app/collections/users', 'app/views/admin/users/list'], function(UserCollection, UserListView){
-            var collection = new UserCollection();
+        // Ensure that Bootstrap initializes
+        require(['bootstrap'], void(0));
 
-            $.when(collection.fetch()).done(function(){
-                var view = new UserListView({
-                    collection: collection
-                });
-
-                $('#injection-point').html(view.render());
+        require(['app/app', 'app/routers/site-router', 'app/routers/user-admin-router', 'app/views/site-nav'], function(App, SiteRouter, UserAdminRouter, SiteNavigationView){
+            App.addRegions({
+                nav: '#nav',
+                page: '#page'
             });
+
+            App.addInitializer(function(options){
+                new SiteRouter();
+                new UserAdminRouter();
+            });
+
+            App.addInitializer(function(options){
+                App.getRegion('nav').show(new SiteNavigationView());
+            });
+
+            App.on("start", function(){
+                Backbone.history.start();
+            });
+
+            App.start();
         });
     </script>
 </body>

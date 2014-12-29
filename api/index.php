@@ -1,9 +1,14 @@
 <?php
+
 require '../vendor/autoload.php';
 
 require '../entities/User.php';
 require '../entities/Role.php';
+require '../entities/Study.php';
+require '../entities/StudyType.php';
+
 require '../entities/UserRole.php';
+require '../entities/UserStudy.php';
 
 require '../entities/mappers/UserMapper.php';
 

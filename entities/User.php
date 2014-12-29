@@ -1,4 +1,5 @@
 <?php
+
 namespace Entities;
 
 class User extends \Spot\Entity {
@@ -20,6 +21,7 @@ class User extends \Spot\Entity {
     {
         return [
             'roles' => $mapper->hasManyThrough($entity, 'Entities\Role', 'Entities\UserRole', 'role_id', 'user_id'),
+            'studies' => $mapper->hasManyThrough($entity, 'Entities\Study', 'Entities\UserStudy', 'study_id', 'user_id')
         ];
     }
 }

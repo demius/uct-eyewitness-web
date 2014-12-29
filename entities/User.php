@@ -13,6 +13,8 @@ class User extends \Spot\Entity {
             'display_name'  => ['type' => 'string', 'required' => true],
             'email_address' => ['type' => 'string', 'unique' => true, 'required' => true],
             'password'      => ['type' => 'integer', 'required' => true],
+            'activated'     => ['type' => 'boolean', 'value' => false, 'required' => true],
+            'locked'        => ['type' => 'boolean', 'value' => false, 'required' => true],
             'registered_on' => ['type' => 'datetime', 'value' => new \DateTime(), 'required' => true]
         ];
     }

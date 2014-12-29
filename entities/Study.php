@@ -25,7 +25,8 @@ class Study extends Entity {
     {
         return [
             'creator' => $mapper->belongsTo($entity, 'Entities\User', 'created_by'),
-            'collaborators' => $mapper->hasManyThrough($entity, 'Entities\User', 'Entities\UserStudy', 'user_id', 'study_id')
+            'collaborators' => $mapper->hasManyThrough($entity, 'Entities\User', 'Entities\UserStudy', 'user_id', 'study_id'),
+            'materials' => $mapper->hasManyThrough($entity, 'Entities\Material', 'Entities\StudyMaterial', 'material_id', 'study_id'),
         ];
     }
 }

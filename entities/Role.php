@@ -11,7 +11,7 @@ class Role extends \Spot\Entity {
             'id'            => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
             'name'          => ['type' => 'string', 'required' => true],
             'description'   => ['type' => 'string', 'unique' => true, 'required' => true],
-            'rights'        => ['type' => 'integer', 'required' => true, 'default' => 0]
+            'permissions'   => ['type' => 'integer', 'required' => true, 'default' => 0]
         ];
     }
 }

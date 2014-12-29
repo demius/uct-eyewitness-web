@@ -1,9 +1,9 @@
-define(['marionette', 'app/collections/users', 'app/views/admin/users/list', 'text!templates/admin/users/manage.html'], function(Marionette, UserCollection, ListView, Tmpl){
+define(['marionette', 'app/collections/users', 'app/views/admin/users/list', 'app/views/admin/users/add', 'text!templates/admin/users/manage.html'], function(Marionette, UserCollection, ListView, GrantAccessView, Tmpl){
     return Marionette.LayoutView.extend({
         template: _.template(Tmpl),
         regions: {
             list: '#user-list',
-            create: '#create-form-wrapper'
+            grant: '#grant-access-form-wrapper'
         },
         onBeforeShow: function(){
             var self = this;
@@ -12,6 +12,8 @@ define(['marionette', 'app/collections/users', 'app/views/admin/users/list', 'te
                 self.getRegion('list').show(new ListView({
                     collection: collection
                 }));
+
+                self.getRegion('grant').show(new GrantAccessView());
             });
         }
     });

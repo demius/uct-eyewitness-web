@@ -1,5 +1,5 @@
 <?php
-namespace Entities\Mappers;
+namespace Eyewitness\Entities\Mappers;
 
 class UserMapper extends \Spot\Mapper {
     public function save(\Spot\EntityInterface $entity, array $options = []) {

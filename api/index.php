@@ -2,16 +2,17 @@
 
 require '../vendor/autoload.php';
 
-require '../entities/User.php';
-require '../entities/Role.php';
-require '../entities/Study.php';
-require '../entities/StudyType.php';
+require '../inc/entities/User.php';
+require '../inc/entities/Role.php';
+require '../inc/entities/Study.php';
+require '../inc/entities/StudyType.php';
 
-require '../entities/UserRole.php';
-require '../entities/UserStudy.php';
+require '../inc/entities/UserRole.php';
+require '../inc/entities/UserStudy.php';
 
-require '../entities/mappers/UserMapper.php';
+require '../inc/entities/mappers/UserMapper.php';
 
+/* Configure the Slim application & container */
 $app = new \Slim\Slim();
 
 $app->container->singleton('db_context', function(){
@@ -26,46 +27,76 @@ $app->container->singleton('db_context', function(){
     return new \Spot\Locator($spot_cfg);
 });
 
+/* Routes: /users */
 $app->get('/users', function () use($app) {
-    $mapper = $app->db_context->mapper('Entities\User');
-    respond(json_encode($mapper->all()->toArray()));
+    $mapper = $app->db_context->mapper('Eyewitness\Entities\User');
+    $users = $mapper->all()->toArray();
+
+    respond($app, ["body" => json_encode($users)]);
 });
 
 $app->post('/users', function() use($app) {
-    $mapper = $app->db_context->mapper('Entities\User');
+    $mapper = $app->db_context->mapper('Eyewitness\Entities\User');
+    $params = json_decode($app->request->getBody());
 
     $entity = $mapper->build([
-        'display_name' => $app->request->params('display_name'),
-        'email_address' => $app->request->params('email_address'),
-        'password' => $app->request->params('password')
+        'display_name' => $params->display_name,
+        'email_address' => $params->email_address,
+        'password' => $params->password
     ]);
 
     if($mapper->save($entity)){
-        return respond(json_encode($entity));
+        return respond($app, ["body" => json_encode($entity)]);
     }
     respond('Failed to save the new user.', 500);
 });
 
 $app->get('/users/:id', function ($id) use($app) {
-    $mapper = $app->db_context->mapper('Entities\User');
-    respond(json_encode($mapper->get($id)));
+    $mapper = $app->db_context->mapper('Eyewitness\Entities\User');
+    $entity = $mapper->get($id);
+
+    if($entity){
+        return respond($app, ["body" => json_encode($entity)]);
+    }
+    respond($app, ["status" => 404]);
 });
 
 $app->put('/users/:id', function($id) use($app) {
+    $mapper = $app->db_context->mapper('Eyewitness\Entities\User');
+    $entity = $mapper->get($id);
 
+    if($entity) {
+        $params = json_decode($app->request->getBody());
+
+        $entity->display_name = $params->display_name;
+        $entity->email_address = $params->email_address;
+        $entity->locked = $params->locked;
+
+        return respond($app, ["status" => 204]);
+    }
+    respond($app, ["status" => 404]);
 });
 
 $app->delete('/users/:id', function($id) use($app) {
-    $spot = get_spot_instance();
-    $mapper = $spot->mapper('Entities\User');
-    echo json_encode($mapper->get($id));
+    respond($app, ["status" => 204]);
 });
 
+/* Slim application bootstrap */
 $app->run();
 
-function respond($body, $http_status = 200, $content_type = 'application/json') {
-    $app = new \Slim\Slim();
-    $app->response->status($http_status);
-    $app->response->headers->set('Content-Type', $content_type);
-    echo $body;
+/* Utility methods */
+function respond($app, $options = array()) {
+    $defaults = [
+        "body" => null,
+        "status" => 200,
+        "content_type" => 'application/json'];
+
+    $opts = (object) array_merge($defaults, $options);
+
+    $app->response->setStatus($opts->status);
+    $app->response->headers->set('Content-Type', $opts->content_type);
+
+    if($opts->body){
+        echo $opts->body;
+    }
 }

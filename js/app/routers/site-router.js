@@ -1,9 +1,10 @@
-define(['marionette', 'app/controllers/site-controller'], function(Marionette, SiteController){
+define(['marionette', 'app/app', 'app/views/home'], function(Marionette, App, HomepageView){
     return Marionette.AppRouter.extend({
-        controller: new SiteController(),
-        appRoutes: {
-            "": "home",
-            "contact": "contact"
+        routes: {
+            '': 'home'
+        },
+        home: function(){
+            App.goto(new HomepageView());
         }
     });
 });

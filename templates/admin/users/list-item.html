@@ -4,11 +4,13 @@
             <i class="fa fa-bars"></i>
         </button>
         <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <% if(!locked) { %>
+            <li><a href="javascript:void(0);" id="revoke-access">Lock (Revoke access)</a></li>
+            <% } else { %>
+            <li><a href="javascript:void(0);" id="reinstate-access">Unlock (Reinstate access)</a></li>
+            <% } %>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#">Assign permission(s)</a></li>
         </ul>
     </div>
 </td>

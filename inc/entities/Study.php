@@ -1,6 +1,6 @@
 <?php
 
-namespace Entities;
+namespace Eyewitness\Entities;
 
 use Spot\Entity;
 
@@ -24,9 +24,9 @@ class Study extends Entity {
     public static function relations(\Spot\MapperInterface $mapper, \Spot\EntityInterface $entity)
     {
         return [
-            'creator' => $mapper->belongsTo($entity, 'Entities\User', 'created_by'),
-            'collaborators' => $mapper->hasManyThrough($entity, 'Entities\User', 'Entities\UserStudy', 'user_id', 'study_id'),
-            'materials' => $mapper->hasManyThrough($entity, 'Entities\Material', 'Entities\StudyMaterial', 'material_id', 'study_id'),
+            'creator' => $mapper->belongsTo($entity, 'Eyewitness\Entities\User', 'created_by'),
+            'collaborators' => $mapper->hasManyThrough($entity, 'Eyewitness\Entities\User', 'Eyewitness\Entities\UserStudy', 'user_id', 'study_id'),
+            'materials' => $mapper->hasManyThrough($entity, 'Eyewitness\Entities\Material', 'Eyewitness\Entities\StudyMaterial', 'material_id', 'study_id'),
         ];
     }
 }

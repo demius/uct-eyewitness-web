@@ -1,6 +1,6 @@
 <?php
 
-namespace Entities;
+namespace Eyewitness\Entities;
 
 class StudyType extends \Spot\Entity {
     protected static $table = "study_types";
@@ -15,7 +15,7 @@ class StudyType extends \Spot\Entity {
     public static function relations(\Spot\MapperInterface $mapper, \Spot\EntityInterface $entity)
     {
         return [
-            'studies' => $mapper->hasMany($entity, 'Entities\Study', 'type'),
+            'studies' => $mapper->hasMany($entity, 'Eyewitness\Entities\Study', 'type'),
         ];
     }
 }

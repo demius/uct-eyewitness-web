@@ -1,6 +1,6 @@
 <?php
 
-namespace Entities;
+namespace Eyewitness\Entities;
 
 class UserRole extends \Spot\Entity {
     protected static $table = "user_roles";

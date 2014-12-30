@@ -1,10 +1,10 @@
 <?php
 
-namespace Entities;
+namespace Eyewitness\Entities;
 
 class User extends \Spot\Entity {
     protected static $table = 'users';
-    protected static $mapper = '\Entities\Mappers\UserMapper';
+    protected static $mapper = '\Eyewitness\Entities\Mappers\UserMapper';
 
     public static function fields()
     {
@@ -13,8 +13,8 @@ class User extends \Spot\Entity {
             'display_name'  => ['type' => 'string', 'required' => true],
             'email_address' => ['type' => 'string', 'unique' => true, 'required' => true],
             'password'      => ['type' => 'integer', 'required' => true],
-            'activated'     => ['type' => 'boolean', 'value' => false, 'required' => true],
-            'locked'        => ['type' => 'boolean', 'value' => false, 'required' => true],
+            'activated'     => ['type' => 'boolean','required' => true],
+            'locked'        => ['type' => 'boolean', 'required' => true],
             'registered_on' => ['type' => 'datetime', 'value' => new \DateTime(), 'required' => true]
         ];
     }
@@ -22,8 +22,8 @@ class User extends \Spot\Entity {
     public static function relations(\Spot\MapperInterface $mapper, \Spot\EntityInterface $entity)
     {
         return [
-            'roles' => $mapper->hasManyThrough($entity, 'Entities\Role', 'Entities\UserRole', 'role_id', 'user_id'),
-            'studies' => $mapper->hasManyThrough($entity, 'Entities\Study', 'Entities\UserStudy', 'study_id', 'user_id')
+            'roles' => $mapper->hasManyThrough($entity, 'Eyewitness\Entities\Role', 'Eyewitness\Entities\UserRole', 'role_id', 'user_id'),
+            'studies' => $mapper->hasManyThrough($entity, 'Eyewitness\Entities\Study', 'Eyewitness\Entities\UserStudy', 'study_id', 'user_id')
         ];
     }
 }

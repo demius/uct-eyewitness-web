@@ -1,5 +1,7 @@
 <?php
 
+namespace Eyewitness\Utilities;
+
 class Crypto {
     private static $allowed_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()-_=+,.?';
 

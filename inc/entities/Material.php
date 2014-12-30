@@ -1,6 +1,6 @@
 <?php
 
-namespace Entities;
+namespace Eyewitness\Entities;
 
 use Spot\Entity;
 

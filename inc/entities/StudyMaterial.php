@@ -1,6 +1,6 @@
 <?php
 
-namespace Entities;
+namespace Eyewitness\Entities;
 
 class StudyMaterial extends \Spot\Entity {
     protected static $table = "study_materials";

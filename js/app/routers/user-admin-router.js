@@ -1,9 +1,14 @@
-define(['marionette', 'app/controllers/user-admin-controller'], function(Marionette, UserAdminController){
+define(['marionette', 'app/app', 'app/views/admin/users/manage'], function(Marionette, App, UserManagementView){
     return Marionette.AppRouter.extend({
-        controller: new UserAdminController(),
-        appRoutes: {
-            "admin/users": "list",
-            "admin/users/register": "register"
+        routes: {
+            'admin/users': 'list',
+            'admin/users/register': 'register'
+        },
+        list: function(){
+            App.goto(new UserManagementView());
+        },
+        register: function(){
+
         }
     });
 });

@@ -23,11 +23,6 @@
         require(['bootstrap'], void(0));
 
         require(['app/app', 'app/routers/site-router', 'app/routers/user-admin-router', 'app/views/site-nav'], function(App, SiteRouter, UserAdminRouter, SiteNavigationView){
-            App.addRegions({
-                nav: '#nav',
-                page: '#page'
-            });
-
             App.addInitializer(function(options){
                 new SiteRouter();
                 new UserAdminRouter();

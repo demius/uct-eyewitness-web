@@ -6,6 +6,7 @@ require '../inc/entities/User.php';
 require '../inc/entities/Role.php';
 require '../inc/entities/Study.php';
 require '../inc/entities/StudyType.php';
+require '../inc/entities/Material.php';
 
 require '../inc/entities/UserRole.php';
 require '../inc/entities/UserStudy.php';
@@ -27,7 +28,11 @@ $app->container->singleton('db_context', function(){
     return new \Spot\Locator($spot_cfg);
 });
 
-/* Routes: /users */
+/*
+    Routes:
+        /users
+        /users/:id
+*/
 $app->get('/users', function () use($app) {
     $mapper = $app->db_context->mapper('Eyewitness\Entities\User');
     $users = $mapper->all()->toArray();
@@ -79,6 +84,18 @@ $app->put('/users/:id', function($id) use($app) {
 
 $app->delete('/users/:id', function($id) use($app) {
     respond($app, ["status" => 204]);
+});
+
+/*
+    Routes:
+        /materials
+        /materials/:id
+*/
+$app->get('/materials', function () use($app) {
+    $mapper = $app->db_context->mapper('Eyewitness\Entities\Material');
+    $materials = $mapper->all()->toArray();
+
+    respond($app, ["body" => json_encode($materials)]);
 });
 
 /* Slim application bootstrap */

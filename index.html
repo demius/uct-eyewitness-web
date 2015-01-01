@@ -22,10 +22,11 @@
         // Ensure that Bootstrap initializes
         require(['bootstrap'], void(0));
 
-        require(['app/app', 'app/routers/site-router', 'app/routers/user-admin-router', 'app/views/site-nav'], function(App, SiteRouter, UserAdminRouter, SiteNavigationView){
+        require(['app/app', 'app/routers/site-router', 'app/routers/user-admin-router', 'app/routers/material-admin-router', 'app/views/site-nav'], function(App, SiteRouter, UserAdminRouter, MaterialAdminRouter, SiteNavigationView){
             App.addInitializer(function(options){
                 new SiteRouter();
                 new UserAdminRouter();
+                new MaterialAdminRouter();
             });
 
             App.addInitializer(function(options){

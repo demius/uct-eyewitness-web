@@ -10,11 +10,13 @@ class Material extends Entity {
     public static function fields()
     {
         return [
-            'id'            => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
-            'description'   => ['type' => 'string', 'required' => true],
-            'uri'           => ['type' => 'string'],
-            'local_uri'     => ['type' => 'string'],
-            'mime_type'     => ['type' => 'string'],
+            'id'                => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
+            'description'       => ['type' => 'string', 'required' => true],
+            'filename'          => ['type' => 'string', 'required' => true],
+            'original_filename' => ['type' => 'string', 'required' => true],
+            'relative_uri'      => ['type' => 'string', 'required' => true],
+            'path'              => ['type' => 'string', 'required' => true],
+            'mime_type'         => ['type' => 'string', 'required' => true]
         ];
     }
 }

@@ -9,8 +9,13 @@ define(['marionette', 'app/collections/materials', 'app/views/admin/faces/galler
             var self = this;
             var collection = new MaterialCollection();
             $.when(collection.fetch()).done(function(){
-                self.getRegion('gallery').show(new GalleryView());
-                self.getRegion('upload').show(new UploadView());
+                self.getRegion('gallery').show(new GalleryView({
+                    collection: collection
+                }));
+
+                self.getRegion('upload').show(new UploadView({
+                    collection: collection
+                }));
             });
         }
     });

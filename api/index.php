@@ -98,6 +98,25 @@ $app->get('/materials', function () use($app) {
     respond($app, ["body" => json_encode($materials)]);
 });
 
+$app->post('/materials', function() use($app) {
+    $mapper = $app->db_context->mapper('Eyewitness\Entities\Material');
+    $params = json_decode($app->request->getBody());
+
+    $entity = $mapper->build([
+        'description' => $params->description,
+        'path' => $params->path,
+        'relative_uri' => $params->relative_uri,
+        'mime_type' => $params->mime_type,
+        'filename' => $params->filename,
+        'original_filename' => $params->original_filename
+    ]);
+
+    if($mapper->save($entity)){
+        return respond($app, ["body" => json_encode($entity)]);
+    }
+    respond('Failed to save the new material.', 500);
+});
+
 /* Slim application bootstrap */
 $app->run();
 

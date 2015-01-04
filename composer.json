@@ -1,6 +1,7 @@
 {
     "require": {
         "slim/slim": "2.*",
-        "vlucas/spot2": "~2.0"
+        "vlucas/spot2": "~2.0",
+        "masterexploder/phpthumb": "v2.0"
     }
 }

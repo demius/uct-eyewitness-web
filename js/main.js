@@ -9,7 +9,7 @@ require.config({
         'underscore': 'underscore-min',
         'backbone': 'backbone-min',
         'marionette': 'backbone.marionette.min',
-        'util/file-uploader': 'fileuploader'
+        'util/blur': 'blur.min'
     },
     shim: {
         'underscore': {
@@ -26,6 +26,6 @@ require.config({
         'bootstrap': {
             deps: ['jquery']
         }
-    }
-    //urlArgs: "bust=" + (new Date()).getTime()
+    },
+    urlArgs: "bust=" + (new Date()).getTime()
 });

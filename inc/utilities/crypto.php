@@ -3,14 +3,20 @@
 namespace Eyewitness\Utilities;
 
 class Crypto {
-    private static $allowed_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()-_=+,.?';
+    private static $alpha_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+    private static $special_chars = '!@#$%^&*()-_=+,.?';
 
-    public function generate_rnd_string($len){
-        $max_index = sizeof(self::$allowed_chars) - 1;
+    public static function generate_rnd_string($len, $allow_special_chars = false){
+        $chars = self::$alpha_chars;
+        if($allow_special_chars){
+            $chars .= self::$special_chars;
+        }
+
+        $max_index = strlen($chars) - 1;
         $str = '';
         for($i = 0; $i < $len; $i++){
             $rnd = rand(0, $max_index);
-            $str .= self::$allowed_chars[$rnd];
+            $str .= $chars[$rnd];
         }
         return $str;
     }

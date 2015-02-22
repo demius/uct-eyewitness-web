@@ -19,4 +19,11 @@ class Material extends Entity {
             'mime_type'         => ['type' => 'string', 'required' => true]
         ];
     }
+
+    public static function relations(\Spot\MapperInterface $mapper, \Spot\EntityInterface $entity)
+    {
+        return [
+            'materials' => $mapper->hasManyThrough($entity, 'Eyewitness\Entities\Facet', 'Eyewitness\Entities\MaterialFacet', 'facet_id', 'material_id'),
+        ];
+    }
 }

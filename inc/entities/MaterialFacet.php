@@ -2,7 +2,9 @@
 
 namespace Eyewitness\Entities;
 
-class MaterialFacet extends \Spot\Entity {
+use Spot\Entity;
+
+class MaterialFacet extends Entity {
     protected static $table = "material_facets";
 
     public static function fields(){

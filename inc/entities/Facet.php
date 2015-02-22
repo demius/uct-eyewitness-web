@@ -2,7 +2,9 @@
 
 namespace Eyewitness\Entities;
 
-class Facet extends \Spot\Entity {
+use Spot\Entity;
+
+class Facet extends Entity {
     protected static $table = 'facets';
 
     public static function fields()

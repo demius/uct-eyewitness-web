@@ -7,9 +7,11 @@ require '../inc/entities/Role.php';
 require '../inc/entities/Study.php';
 require '../inc/entities/StudyType.php';
 require '../inc/entities/Material.php';
+require '../inc/entities/Facet.php';
 
 require '../inc/entities/UserRole.php';
 require '../inc/entities/UserStudy.php';
+require '../inc/entities/MaterialFacet.php';
 
 require '../inc/entities/mappers/UserMapper.php';
 
@@ -115,6 +117,15 @@ $app->post('/materials', function() use($app) {
         return respond($app, ["body" => json_encode($entity)]);
     }
     respond('Failed to save the new material.', 500);
+});
+
+$app->delete('/materials/:id', function ($id) use($app) {
+    $mapper = $app->db_context->mapper('Eyewitness\Entities\Material');
+    $entity = $mapper->get($id);
+    if($entity){
+        $mapper->delete ($entity);
+    }
+    respond($app, ["status" => 204]);
 });
 
 /* Slim application bootstrap */

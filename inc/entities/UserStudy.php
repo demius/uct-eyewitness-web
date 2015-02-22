@@ -2,7 +2,9 @@
 
 namespace Eyewitness\Entities;
 
-class UserStudy extends \Spot\Entity {
+use Spot\Entity;
+
+class UserStudy extends Entity {
     protected static $table = "user_studies";
 
     public static function fields(){

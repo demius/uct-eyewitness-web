@@ -2,7 +2,9 @@
 
 namespace Eyewitness\Entities;
 
-class StudyMaterial extends \Spot\Entity {
+use Spot\Entity;
+
+class StudyMaterial extends Entity {
     protected static $table = "study_materials";
 
     public static function fields(){

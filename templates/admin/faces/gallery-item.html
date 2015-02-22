@@ -11,13 +11,15 @@
         display:inline-block;
         margin: 5px 3px;
     }
+
+    .delete-gallery-image{color:#990000;}
 </style>
 
 <div class="gallery-image">
     <div class="thumbnail">
         <img src="/uploads/thumbs/<%= filename %>" alt="<%= description %>" />
         <ul class="gallery-image-menu">
-            <li><a href="javascript:void(0);" title="Delete this image"><i class="fa fa-trash fa-lg"></i></a></li>
+            <li><a href="javascript:void(0);" title="Delete this image" class="delete-gallery-image"><i class="fa fa-trash fa-lg"></i></a></li>
         </ul>
     </div>
 </div>

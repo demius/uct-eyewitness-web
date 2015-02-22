@@ -2,7 +2,9 @@
 
 namespace Eyewitness\Entities;
 
-class Role extends \Spot\Entity {
+use Spot\Entity;
+
+class Role extends Entity {
     protected static $table = 'roles';
 
     public static function fields()

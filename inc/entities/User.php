@@ -2,7 +2,9 @@
 
 namespace Eyewitness\Entities;
 
-class User extends \Spot\Entity {
+use Spot\Entity;
+
+class User extends Entity {
     protected static $table = 'users';
     protected static $mapper = '\Eyewitness\Entities\Mappers\UserMapper';
 
